@@ -1,5 +1,6 @@
 {
   "name": "turkey-map-app",
+  "homepage": "https://yucel-gumus.github.io/turkey-map.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
