@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.a278f554.css",
-    "main.js": "/static/js/main.3f47af99.js",
-    "static/js/787.08ce93a3.chunk.js": "/static/js/787.08ce93a3.chunk.js",
-    "index.html": "/index.html",
-    "main.a278f554.css.map": "/static/css/main.a278f554.css.map",
-    "main.3f47af99.js.map": "/static/js/main.3f47af99.js.map",
-    "787.08ce93a3.chunk.js.map": "/static/js/787.08ce93a3.chunk.js.map"
+    "main.css": "/turkey-map.github.io/static/css/main.a278f554.css",
+    "main.js": "/turkey-map.github.io/static/js/main.db61455f.js",
+    "static/js/787.08ce93a3.chunk.js": "/turkey-map.github.io/static/js/787.08ce93a3.chunk.js",
+    "index.html": "/turkey-map.github.io/index.html",
+    "main.a278f554.css.map": "/turkey-map.github.io/static/css/main.a278f554.css.map",
+    "main.db61455f.js.map": "/turkey-map.github.io/static/js/main.db61455f.js.map",
+    "787.08ce93a3.chunk.js.map": "/turkey-map.github.io/static/js/787.08ce93a3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a278f554.css",
-    "static/js/main.3f47af99.js"
+    "static/js/main.db61455f.js"
   ]
 }
