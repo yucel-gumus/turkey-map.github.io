@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MapContainer, GeoJSON, TileLayer, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import proj4 from "proj4";
 import turkeyGeoJSON from "./tr-cities.json";
-
-proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
 
 const TurkeyMap = () => {
   const mapRef = useRef();
   const [highlightedCity, setHighlightedCity] = useState(null);
 
+  const initialCenter = [39, 35]; // Turkey center coordinates (approx)
+  const initialZoom = 6;
+
   useEffect(() => {
     if (mapRef.current) {
-      mapRef.current.flyTo([39.9255, 32.8609], 6);
+      mapRef.current.flyTo(initialCenter, initialZoom);
     }
   }, []);
 
@@ -31,22 +31,24 @@ const TurkeyMap = () => {
 
   const getStyle = (feature) => {
     return {
-      color: feature.properties.name === highlightedCity ? "red" : "black",
+      fillColor:
+        feature.properties.name === highlightedCity ? "#FFFF00" : "#808080", // Highlight yellow, default grey
       weight: 1,
-      fillColor: feature.properties.name === highlightedCity ? "red" : "transparent",
       fillOpacity: 0.5,
     };
   };
 
   return (
     <MapContainer
-      center={[39.9255, 32.8609]}
-      zoom={6}
-      style={{ height: "100vh", width: "100%" }}
       ref={mapRef}
+      center={initialCenter}
+      zoom={initialZoom}
+      style={{ height: "100vh", width: "100%" }}
+      scrollWheelZoom={true}
+      zoomSnap={0.1}
     >
       <TileLayer
-        url={process.env.PUBLIC_URL + "/map.png"}
+        url={process.env.PUBLIC_URL + "/map.png"} // Reverted to original
         opacity={1}
         zIndex={0}
       />
