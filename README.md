@@ -1,60 +1,70 @@
-# Türkiye İnteraktif Harita Uygulaması
+# Türkiye İnteraktif Harita
 
-Bu proje, React ve Leaflet kullanılarak oluşturulmuş interaktif bir Türkiye haritası uygulamasıdır. Harita üzerinde Türkiye'nin şehirleri gösterilir ve tıklanan şehir vurgulanarak ismi bir popup içinde belirtilir.
+React + Leaflet ile **81 il** sınır poligonlarını gösteren, tıklanan ili vurgulayan ve popup ile isim gösteren GitHub Pages uygulaması.
+
+**Canlı:** [yucel-gumus.github.io/turkey-map.github.io](https://yucel-gumus.github.io/turkey-map.github.io/)  
+**GitHub:** [yucel-gumus/turkey-map.github.io](https://github.com/yucel-gumus/turkey-map.github.io)
+
+---
 
 ## Özellikler
 
-*   Türkiye'nin şehirlerini gösteren interaktif harita.
-*   Harita üzerinde kaydırma ve yakınlaştırma/uzaklaştırma.
-*   Şehirlere tıklandığında sarı renkle vurgulama.
-*   Tıklanan şehrin ismini gösteren popup.
-*   Varsayılan şehir rengi gridir.
+- `src/tr-cities.json` GeoJSON benzeri il sınırları
+- Zoom / pan; tıklanınca sarı highlight + popup
+- Varsayılan gri dolgu; seçili il kontrast rengi
+- **proj4** ile koordinat dönüşümü (özel projeksiyon gerekiyorsa)
+- `gh-pages` ile tek komut deploy
 
-## Kullanılan Teknolojiler
+---
 
-*   [React](https://reactjs.org/)
-*   [react-leaflet](https://react-leaflet.js.org/)
-*   [Leaflet](https://leafletjs.com/)
-*   [Create React App](https://create-react-app.dev/)
+## Teknoloji
 
-## Kurulum ve Çalıştırma
+- Create React App (`react-scripts` 5)
+- react-leaflet 4, Leaflet 1.9
+- gh-pages deploy pipeline
 
-1.  **Projeyi Klonlayın:**
-    ```bash
-    git clone <repository_url>
-    cd <repository_directory>
-    ```
+---
 
-2.  **Bağımlılıkları Yükleyin:**
-    ```bash
-    npm install
-    ```
+## Kurulum
 
-3.  **Uygulamayı Başlatın:**
-    ```bash
-    npm start
-    ```
-    Uygulama varsayılan olarak `http://localhost:3000` adresinde açılacaktır.
+```bash
+git clone https://github.com/yucel-gumus/turkey-map.github.io.git
+cd turkey-map.github.io
+npm install
+npm start
+```
 
-## Veri Kaynağı
+Geliştirme: `http://localhost:3000`
 
-*   Şehirlerin coğrafi sınır verileri `src/tr-cities.json` dosyasından alınmaktadır.
+---
 
-## Harita Katmanı (Tile Layer)
+## Harita altlığı
 
-*   Uygulama, harita altlığı olarak `public/map.png` dosyasını kullanacak şekilde ayarlanmıştır. Bu dosyanın projede `public` klasörü altında bulunduğundan emin olun. Eğer bu dosya mevcut değilse, harita altlığı boş görünecektir. Alternatif olarak, `src/App.js` dosyasındaki `TileLayer` bileşeninin `url` prop'unu OpenStreetMap gibi bir harita sağlayıcısıyla (`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`) değiştirebilirsiniz.
+Proje `public/map.png` özel raster altlık kullanacak şekilde ayarlanabilir. Dosya yoksa `src/App.js` içindeki `TileLayer` URL'sini OpenStreetMap'e çevirin:
 
-## Build ve Deployment
+```text
+https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+```
 
-*   **Build:** Uygulamanın üretim sürümünü oluşturmak için:
-    ```bash
-    npm run build
-    ```
-*   **Deployment (GitHub Pages):** Proje GitHub Pages'e deploy edilecek şekilde yapılandırılmıştır:
-    ```bash
-    npm run deploy
-    ```
+---
 
-## Canlı Demo
+## Build ve yayın
 
-Uygulamanın canlı demosuna [buradan](https://yucel-gumus.github.io/turkey-map.github.io/) ulaşabilirsiniz. (Not: Bu link `package.json` dosyasından alınmıştır, güncel olmayabilir veya harita katmanı sorunu nedeniyle düzgün çalışmayabilir.)
+```bash
+npm run build
+npm run deploy    # homepage: package.json içinde tanımlı
+```
+
+`package.json` → `"homepage": "https://yucel-gumus.github.io/turkey-map.github.io/"`
+
+---
+
+## Veri kaynağı
+
+İl geometrileri repoda `src/tr-cities.json`; güncelleme için kaynak shapefile/GeoJSON dışarıdan işlenip bu dosyaya yazılır.
+
+---
+
+## Lisans
+
+MIT.
