@@ -1,70 +1,67 @@
-# Türkiye İnteraktif Harita
+# 🗺️ Türkiye İnteraktif Haritası (Interactive Turkey GIS Map)
 
-React + Leaflet ile **81 il** sınır poligonlarını gösteren, tıklanan ili vurgulayan ve popup ile isim gösteren GitHub Pages uygulaması.
+Türkiye İnteraktif Haritası; Türkiye'nin 81 ilinin sınır poligonlarını dinamik olarak harita üzerinde çizdiren, seçilen veya üzerine gelinen ili vurgulayan ve coğrafi bilgi sistemi (CBS) özelliklerini tarayıcıya taşıyan modern bir **React + Leaflet + Proj4** web uygulamasıdır.
 
-**Canlı:** [yucel-gumus.github.io/turkey-map.github.io](https://yucel-gumus.github.io/turkey-map.github.io/)  
-**GitHub:** [yucel-gumus/turkey-map.github.io](https://github.com/yucel-gumus/turkey-map.github.io)
-
----
-
-## Özellikler
-
-- `src/tr-cities.json` GeoJSON benzeri il sınırları
-- Zoom / pan; tıklanınca sarı highlight + popup
-- Varsayılan gri dolgu; seçili il kontrast rengi
-- **proj4** ile koordinat dönüşümü (özel projeksiyon gerekiyorsa)
-- `gh-pages` ile tek komut deploy
+Uygulama, özel harita projeksiyonları ve koordinat dönüşümleri gerçekleştirebilmek amacıyla **proj4** kütüphanesini entegre etmektedir.
 
 ---
 
-## Teknoloji
+## 🌟 Öne Çıkan Özellikler
 
-- Create React App (`react-scripts` 5)
-- react-leaflet 4, Leaflet 1.9
-- gh-pages deploy pipeline
+* 🇹🇷 **81 İl Poligon Çizimi (GeoJSON):** `src/tr-cities.json` dosyası içerisindeki GeoJSON koordinat verilerini okuyarak 81 ilin sınırlarını kusursuz bir şekilde vektörel katmanlar olarak çizer.
+* 📍 **Dinamik İl Vurgulama (Highlight):** 
+  * Fareyle üzerine gelinen veya tıklanan iller, kontrast renklerle (sarı highlight) ve özel kenarlık çizgileriyle anında vurgulanır.
+  * Tıklanan ile otomatik odaklanma (zoom-in) ve o ilin bilgilerini gösteren Leaflet Popup baloncuğu açılır.
+* 🌐 **proj4 ile Hassas Koordinat Dönüşümü:** CBS verileriyle çalışırken farklı projeksiyon sistemleri (EPSG:4326 WGS84'ten yerel ED50/UTM projeksiyonlarına) arasında gerçek zamanlı koordinat dönüşümleri yapılmasına olanak tanır.
+* 🎨 **Özelleştirilebilir Harita Altlığı (TileLayer):** OpenStreetMap, CartoDB veya yerel olarak barındırılan özel raster harita görsellerini altlık olarak kullanabilme desteği.
+* 🚀 **Tek Komutla Dağıtım (GitHub Pages):** `gh-pages` entegrasyonu ile uygulamanın derlenmesi ve GitHub Pages üzerinde yayına alınması otomatikleştirilmiştir.
 
 ---
 
-## Kurulum
+## 🏗️ Proje Klasör Yapısı
 
+```
+turkey-map.github.io/
+├── src/
+│   ├── components/       # Harita bileşeni ve CBS kontrol paneli
+│   ├── tr-cities.json    # 81 ilin sınır koordinatlarını barındıran GeoJSON verisi
+│   ├── App.js            # Leaflet MapContainer, TileLayer ve GeoJSON katmanlarının yönetildiği ana dosya
+│   └── index.js
+├── public/
+│   └── index.html
+├── package.json          # gh-pages deploy komutları ve proj4 bağımlılığı
+└── README.md
+```
+
+---
+
+## 🚀 Kurulum ve Yerel Çalıştırma
+
+### 1. Bağımlılıkları Yükleyin
 ```bash
 git clone https://github.com/yucel-gumus/turkey-map.github.io.git
 cd turkey-map.github.io
 npm install
+```
+
+### 2. Uygulamayı Başlatın
+```bash
 npm start
 ```
-
-Geliştirme: `http://localhost:3000`
-
----
-
-## Harita altlığı
-
-Proje `public/map.png` özel raster altlık kullanacak şekilde ayarlanabilir. Dosya yoksa `src/App.js` içindeki `TileLayer` URL'sini OpenStreetMap'e çevirin:
-
-```text
-https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-```
+Uygulama `http://localhost:3000` adresinde geliştirme modunda çalışacaktır.
 
 ---
 
-## Build ve yayın
+## 📦 Dağıtım (Deploy)
 
+Projeyi derlemek ve `gh-pages` dalına yükleyerek yayına almak için:
 ```bash
-npm run build
-npm run deploy    # homepage: package.json içinde tanımlı
+npm run deploy
 ```
-
-`package.json` → `"homepage": "https://yucel-gumus.github.io/turkey-map.github.io/"`
-
----
-
-## Veri kaynağı
-
-İl geometrileri repoda `src/tr-cities.json`; güncelleme için kaynak shapefile/GeoJSON dışarıdan işlenip bu dosyaya yazılır.
+*Not: `package.json` dosyasındaki `homepage` alanı `https://yucel-gumus.github.io/turkey-map.github.io/` olarak yapılandırılmıştır.*
 
 ---
 
-## Lisans
-
-MIT.
+## 🔗 Canlı Bağlantılar
+* **Canlı Demo:** [https://yucel-gumus.github.io/turkey-map.github.io/](https://yucel-gumus.github.io/turkey-map.github.io/)
+* **Geliştirici LinkedIn:** [https://linkedin.com/in/yucel-gumus](https://linkedin.com/in/yucel-gumus)
