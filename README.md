@@ -1,67 +1,99 @@
-# 🗺️ Türkiye İnteraktif Haritası (Interactive Turkey GIS Map)
+# 🗺️ Turkey Interactive GIS Map - 81 Provinces GeoJSON & Leaflet Explorer
 
-Türkiye İnteraktif Haritası; Türkiye'nin 81 ilinin sınır poligonlarını dinamik olarak harita üzerinde çizdiren, seçilen veya üzerine gelinen ili vurgulayan ve coğrafi bilgi sistemi (CBS) özelliklerini tarayıcıya taşıyan modern bir **React + Leaflet + Proj4** web uygulamasıdır.
+[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Leaflet](https://img.shields.io/badge/Leaflet-GIS_Map-199900?style=for-the-badge&logo=leaflet&logoColor=white)](https://leafletjs.com/)
+[![GeoJSON](https://img.shields.io/badge/Data-GeoJSON_81_Provinces-blue?style=for-the-badge)](https://geojson.org/)
+[![Proj4](https://img.shields.io/badge/Proj4-Coordinate_Transformation-orange?style=for-the-badge)](https://proj4js.org/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-yucelgumus.dev-2563EB?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.yucelgumus.dev/)
 
-Uygulama, özel harita projeksiyonları ve koordinat dönüşümleri gerçekleştirebilmek amacıyla **proj4** kütüphanesini entegre etmektedir.
+> Türkiye'nin 81 ilinin coğrafi sınır poligonlarını **GeoJSON** formatında dinamik olarak harita üzerinde çizdiren, seçilen veya üzerine gelinen ili anlık olarak vurgulayan, il bazlı demografik/istatistiksel kartlar sunan ve **Proj4** ile harita projeksiyonu dönüşümlerini destekleyen modern **React & Leaflet** CBS web uygulaması.
 
 ---
 
 ## 🌟 Öne Çıkan Özellikler
 
-* 🇹🇷 **81 İl Poligon Çizimi (GeoJSON):** `src/tr-cities.json` dosyası içerisindeki GeoJSON koordinat verilerini okuyarak 81 ilin sınırlarını kusursuz bir şekilde vektörel katmanlar olarak çizer.
-* 📍 **Dinamik İl Vurgulama (Highlight):** 
-  * Fareyle üzerine gelinen veya tıklanan iller, kontrast renklerle (sarı highlight) ve özel kenarlık çizgileriyle anında vurgulanır.
-  * Tıklanan ile otomatik odaklanma (zoom-in) ve o ilin bilgilerini gösteren Leaflet Popup baloncuğu açılır.
-* 🌐 **proj4 ile Hassas Koordinat Dönüşümü:** CBS verileriyle çalışırken farklı projeksiyon sistemleri (EPSG:4326 WGS84'ten yerel ED50/UTM projeksiyonlarına) arasında gerçek zamanlı koordinat dönüşümleri yapılmasına olanak tanır.
-* 🎨 **Özelleştirilebilir Harita Altlığı (TileLayer):** OpenStreetMap, CartoDB veya yerel olarak barındırılan özel raster harita görsellerini altlık olarak kullanabilme desteği.
-* 🚀 **Tek Komutla Dağıtım (GitHub Pages):** `gh-pages` entegrasyonu ile uygulamanın derlenmesi ve GitHub Pages üzerinde yayına alınması otomatikleştirilmiştir.
+- 🇹🇷 **Eksiksiz 81 İl Sınır Poligonları:** Türkiye'nin tüm illerini kapsayan hassas koordinatlı sınır veri seti (`src/turkey_geo.json`).
+- 🎯 **İnteraktif Vurgulama & Hover Efektleri:** Fare ile il üzerine gelindiğinde anında renk değişimi, il adı ve plaka kodu tooltipleri.
+- 🔍 **Tıklama ile Odaklanma (Click-to-Zoom):** Seçilen ilin sınırlarına göre haritayı otomatik ortalayan ve yakınlaştıran dinamik kamera motoru.
+- 📐 **Proj4 ile Koordinat Dönüşümleri:** Farklı harita projeksiyon sistemleri (UTM, ED50, WGS84) arasında tarayıcı tarafında hatasız koordinat çevrimi.
+- 📱 **Tam Duyarlı (Responsive) Harita Arayüzü:** Mobil ve masaüstü ekran boyutlarına otomatik uyum sağlayan Leaflet kontrolleri.
 
 ---
 
-## 🏗️ Proje Klasör Yapısı
+## 🏗️ Mimari & Coğrafi Veri Akışı
 
-```
-turkey-map.github.io/
-├── src/
-│   ├── components/       # Harita bileşeni ve CBS kontrol paneli
-│   ├── tr-cities.json    # 81 ilin sınır koordinatlarını barındıran GeoJSON verisi
-│   ├── App.js            # Leaflet MapContainer, TileLayer ve GeoJSON katmanlarının yönetildiği ana dosya
-│   └── index.js
-├── public/
-│   └── index.html
-├── package.json          # gh-pages deploy komutları ve proj4 bağımlılığı
-└── README.md
+```mermaid
+graph LR
+    GeoJSON[(turkey_geo.json: 81 İl Poligonları)] --> ReactLeaflet[React-Leaflet Map View]
+    CityMeta[(tr-cities.json: İl Metaverileri)] --> TooltipController[Tooltip & Bilgi Kartı Paneli]
+    Proj4[Proj4 Projeksiyon Dönüştürücü] --> ReactLeaflet
+    User([Kullanıcı]) -->|Hover / Tıklama| ReactLeaflet
+    ReactLeaflet --> TooltipController
 ```
 
 ---
 
-## 🚀 Kurulum ve Yerel Çalıştırma
+## 🚀 Hızlı Başlangıç
 
-### 1. Bağımlılıkları Yükleyin
+### Gereksinimler
+- **Node.js**: v16.0 veya üstü
+
+### Kurulum
+
 ```bash
 git clone https://github.com/yucel-gumus/turkey-map.github.io.git
 cd turkey-map.github.io
+
 npm install
 ```
 
-### 2. Uygulamayı Başlatın
+### Başlatma
+
 ```bash
 npm start
 ```
-Uygulama `http://localhost:3000` adresinde geliştirme modunda çalışacaktır.
 
----
+Tarayıcınızda `http://localhost:3000` adresinde açılacaktır.
 
-## 📦 Dağıtım (Deploy)
+### GitHub Pages Dağıtımı
 
-Projeyi derlemek ve `gh-pages` dalına yükleyerek yayına almak için:
 ```bash
 npm run deploy
 ```
-*Not: `package.json` dosyasındaki `homepage` alanı `https://yucel-gumus.github.io/turkey-map.github.io/` olarak yapılandırılmıştır.*
 
 ---
 
-## 🔗 Canlı Bağlantılar
-* **Canlı Demo:** [https://yucel-gumus.github.io/turkey-map.github.io/](https://yucel-gumus.github.io/turkey-map.github.io/)
-* **Geliştirici LinkedIn:** [https://linkedin.com/in/yucel-gumus](https://linkedin.com/in/yucel-gumus)
+## 📂 Proje Dizin Yapısı
+
+```
+turkey-map.github.io/
+├── package.json
+├── public/
+└── src/
+    ├── App.js                      # Ana harita konteyneri
+    ├── App.css                     # Harita ve popup stilleri
+    ├── turkey_geo.json             # 81 İl GeoJSON poligon verisi
+    ├── tr-cities.json              # İl detayları ve plaka kodları
+    └── index.js
+```
+
+---
+
+## 📄 Lisans
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
+
+---
+
+## 👨‍💻 Geliştirici & İletişim
+
+**Yücel Gümüş** - Full Stack Developer
+
+- 🌐 **Web Sitesi / Portfolyo:** [yucelgumus.dev](https://www.yucelgumus.dev/)
+- 💼 **LinkedIn:** [linkedin.com/in/yucel-gumus](https://www.linkedin.com/in/yucel-gumus/)
+- 🐙 **GitHub:** [@yucel-gumus](https://github.com/yucel-gumus)
+
+<p align="left">
+  <a href="https://www.yucelgumus.dev/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Developed%20by-Yücel%20Gümüş-blue?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Yücel Gümüş Portfolio" />
+  </a>
+</p>
