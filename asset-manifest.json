@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/turkey-map.github.io/static/css/main.a278f554.css",
-    "main.js": "/turkey-map.github.io/static/js/main.39427746.js",
-    "static/js/787.08ce93a3.chunk.js": "/turkey-map.github.io/static/js/787.08ce93a3.chunk.js",
+    "main.css": "/turkey-map.github.io/static/css/main.e88ffaa1.css",
+    "main.js": "/turkey-map.github.io/static/js/main.30454b0b.js",
+    "static/js/453.22ed1bf2.chunk.js": "/turkey-map.github.io/static/js/453.22ed1bf2.chunk.js",
     "index.html": "/turkey-map.github.io/index.html",
-    "main.a278f554.css.map": "/turkey-map.github.io/static/css/main.a278f554.css.map",
-    "main.39427746.js.map": "/turkey-map.github.io/static/js/main.39427746.js.map",
-    "787.08ce93a3.chunk.js.map": "/turkey-map.github.io/static/js/787.08ce93a3.chunk.js.map"
+    "main.e88ffaa1.css.map": "/turkey-map.github.io/static/css/main.e88ffaa1.css.map",
+    "main.30454b0b.js.map": "/turkey-map.github.io/static/js/main.30454b0b.js.map",
+    "453.22ed1bf2.chunk.js.map": "/turkey-map.github.io/static/js/453.22ed1bf2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a278f554.css",
-    "static/js/main.39427746.js"
+    "static/css/main.e88ffaa1.css",
+    "static/js/main.30454b0b.js"
   ]
 }
