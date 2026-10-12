@@ -332,11 +332,6 @@ html, body {
   background: #f8fafc !important;
 }
 
-.leaflet-interactive {
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.06));
-  transition: fill 0.15s ease, fill-opacity 0.15s ease;
-}
-
 /* Custom Tooltip */
 .leaflet-custom-tooltip {
   background: rgba(15, 23, 42, 0.92) !important;

@@ -228,7 +228,13 @@ const TurkeyMap = () => {
           maxBoundsViscosity={1.0}
           minZoom={TURKEY_MIN_ZOOM}
           maxZoom={TURKEY_MAX_ZOOM}
-          zoomSnap={0.25}
+          zoomSnap={1}
+          zoomDelta={1}
+          wheelDebounceTime={40}
+          wheelPxPerZoomLevel={80}
+          inertia={true}
+          inertiaDeceleration={3000}
+          preferCanvas={true}
           scrollWheelZoom={true}
           attributionControl={false}
           className="leaflet-map"
