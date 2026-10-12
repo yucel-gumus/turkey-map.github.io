@@ -21,6 +21,21 @@ const TurkeyMap = () => {
       click: () => {
         setHighlightedCity(feature.properties.name);
       },
+      mouseover: (e) => {
+        const l = e.target;
+        l.setStyle({
+          fillOpacity: 0.8,
+          weight: 2,
+        });
+        l.bringToFront();
+      },
+      mouseout: (e) => {
+        const l = e.target;
+        l.setStyle({
+          fillOpacity: 0.5,
+          weight: 1,
+        });
+      },
     });
 
     layer.bindPopup(feature.properties.name, {
