@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import turkeyGeoJSON from './tr-cities.json';
@@ -14,7 +14,6 @@ import {
   TURKEY_INITIAL_ZOOM,
   TURKEY_MIN_ZOOM,
   TURKEY_MAX_ZOOM,
-  ESRI_CANVAS_CONFIG,
   REGION_COLORS,
   getRegionBounds,
 } from './utils/gisUtils';
@@ -231,19 +230,10 @@ const TurkeyMap = () => {
           maxZoom={TURKEY_MAX_ZOOM}
           zoomSnap={0.25}
           scrollWheelZoom={true}
+          attributionControl={false}
           className="leaflet-map"
         >
-          {/* Only Esri Canvas Light Gray Basemap - Fast, clean, watermark-free */}
-          <TileLayer
-            url={ESRI_CANVAS_CONFIG.url}
-            attribution={ESRI_CANVAS_CONFIG.attribution}
-            maxZoom={ESRI_CANVAS_CONFIG.maxZoom}
-            minZoom={ESRI_CANVAS_CONFIG.minZoom}
-            keepBuffer={6}
-            updateWhenIdle={false}
-            updateWhenZooming={false}
-          />
-
+          {/* Pure Turkey 81 Provinces Vector Layer - No neighboring countries */}
           <GeoJSON
             ref={geoJsonRef}
             data={turkeyGeoJSON}

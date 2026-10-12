@@ -5,7 +5,6 @@ import App from './App';
 // Mock react-leaflet because v4 is ESM-only and react-scripts Jest doesn't transpile node_modules ESM
 jest.mock('react-leaflet', () => ({
   MapContainer: ({ children }) => <div data-testid="map-container">{children}</div>,
-  TileLayer: () => <div data-testid="tile-layer" />,
   GeoJSON: require('react').forwardRef((props, ref) => <div ref={ref} data-testid="geojson-layer" />),
   useMap: () => ({
     flyTo: jest.fn(),

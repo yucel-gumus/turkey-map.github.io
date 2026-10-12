@@ -16,7 +16,7 @@
 - 🇹🇷 **Eksiksiz & Optimize 81 İl Sınır Poligonları:** Koordinat hassasiyeti optimize edilerek boyutu %87 oranında küçültülmüş, zenginleştirilmiş (plaka kodu, bölge, ağırlık merkezi ve sınırlayıcı kutu verilerini içeren) hafif GeoJSON veri seti.
 - 🔍 **Akıllı Arama & Otomatik Tamamlama:** İl adı veya plaka koduyla (örn: `34`, `06`, `Trabzon`, `İzmir`) anında arama ve seçilen ile otomatik kamera odaklanması.
 - 🧭 **7 Coğrafi Bölge Filtresi:** Marmara, Ege, Akdeniz, İç Anadolu, Karadeniz, Doğu Anadolu ve Güneydoğu Anadolu bölgelerine göre filtreleme ve tek tıkla bölgeye odaklanma (`fitBounds`).
-- 🎨 **Çoklu Altlık Harita Seçici (Basemaps):** CartoDB Positron (Açık), OpenStreetMap (Standart), CartoDB Dark Matter (Karanlık) ve Esri World Imagery (Uydu) katmanları arasında kesintisiz geçiş.
+- 🇹🇷 **Yalnızca Türkiye Sınırları (Saf Vektör Harita):** Harita üzerinde Irak, Gürcistan, Suriye vb. komşu ülkeler veya yabancı kara parçaları bulunmaz. Yalnızca Türkiye Cumhuriyeti'nin 81 il sınırları temiz bir CBS tuvali üzerinde sergilenir.
 - 📐 **Proj4 ile Gerçek Zamanlı Projeksiyon Dönüşümleri:** Seçilen ilin merkez koordinatları için anlık olarak WGS84 (EPSG:4326), Web Mercator (EPSG:3857) ve Türkiye'nin ilgili UTM dilimi (UTM 35N, 36N, 37N, 38N) koordinat hesaplamaları.
 - 🎯 **İnteraktif Vurgulama & Hover Tooltip:** Fare ile il üzerine gelindiğinde akıcı parıltı efekti, özel Leaflet tooltip gösterimi ve tıklama ile detaylı CBS bilgi kartı.
 - 📱 **Modern & Duyarlı (Glassmorphic) Arayüz:** Masaüstü, tablet ve mobil cihazlar için optimize edilmiş, saydam cam efektli şık kullanıcı arayüzü.
@@ -27,9 +27,9 @@
 
 ```mermaid
 flowchart TD
-    GeoData["tr-cities.json (81 İl GeoJSON - 137 KB)"] --> AppState["React State (Selected City, Region, Basemap)"]
-    AppState --> MapView["React-Leaflet MapContainer"]
-    AppState --> HeaderBar["Header: Arama, Bölge Çipleri, Altlık Seçici"]
+    GeoData["tr-cities.json (81 İl GeoJSON - 137 KB)"] --> AppState["React State (Selected City, Region)"]
+    AppState --> MapView["React-Leaflet MapContainer (Saf Türkiye Vektörü)"]
+    AppState --> HeaderBar["Header: Arama & 7 Bölge Çipleri"]
     AppState --> InfoCard["InfoPanel: CBS & Proj4 Bilgi Kartı"]
     MapView --> Proj4Engine["Proj4: EPSG:4326 -> EPSG:3857 & UTM Dönüşümü"]
     Proj4Engine --> InfoCard

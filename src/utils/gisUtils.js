@@ -25,13 +25,7 @@ export const TURKEY_MAX_BOUNDS = [
   [43.5, 46.0],
 ];
 
-// Single clean basemap: Esri Canvas Light Gray (no watermark, no API key required)
-export const ESRI_CANVAS_CONFIG = {
-  url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-  attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-  maxZoom: 16,
-  minZoom: 5,
-};
+
 
 export const REGIONS = [
   'Tümü',
