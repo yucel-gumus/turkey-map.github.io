@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { REGIONS, BASEMAPS, normalizeTurkishText } from '../utils/gisUtils';
+import React, { useState, useRef, useEffect, memo } from 'react';
+import { REGIONS, normalizeTurkishText } from '../utils/gisUtils';
 
 const Header = ({
   cities,
@@ -7,8 +7,6 @@ const Header = ({
   onSelectCity,
   selectedRegion,
   onSelectRegion,
-  activeBasemap,
-  onChangeBasemap,
   colorMode,
   onToggleColorMode,
   onResetView,
@@ -104,23 +102,6 @@ const Header = ({
             )}
           </div>
 
-          {/* Basemap Selector */}
-          <div className="select-wrapper">
-            <span className="select-icon">🗺️</span>
-            <select
-              value={activeBasemap}
-              onChange={(e) => onChangeBasemap(e.target.value)}
-              className="basemap-select"
-              title="Altlık Harita Seçimi"
-            >
-              {Object.values(BASEMAPS).map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* Color Mode Toggle */}
           <button
             type="button"
@@ -169,4 +150,4 @@ const Header = ({
   );
 };
 
-export default Header;
+export default memo(Header);

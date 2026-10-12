@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -8,26 +8,30 @@ import InfoPanel from './components/InfoPanel';
 import MapController from './components/MapController';
 import FooterBadge from './components/FooterBadge';
 import {
+  TURKEY_BOUNDS,
+  TURKEY_MAX_BOUNDS,
   TURKEY_INITIAL_CENTER,
   TURKEY_INITIAL_ZOOM,
+  TURKEY_MIN_ZOOM,
+  TURKEY_MAX_ZOOM,
+  ESRI_CANVAS_CONFIG,
   REGION_COLORS,
-  BASEMAPS,
   getRegionBounds,
 } from './utils/gisUtils';
 import './App.css';
 
 const TurkeyMap = () => {
   const [selectedCity, setSelectedCity] = useState(null);
-  const [hoveredCity, setHoveredCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('Tümü');
-  const [activeBasemap, setActiveBasemap] = useState('osm');
   const [colorMode, setColorMode] = useState('regions'); // 'regions' or 'plain'
 
   const [targetBounds, setTargetBounds] = useState(null);
   const [targetCenter, setTargetCenter] = useState(TURKEY_INITIAL_CENTER);
   const [targetZoom, setTargetZoom] = useState(TURKEY_INITIAL_ZOOM);
 
-  // Extract cities array and map
+  const geoJsonRef = useRef(null);
+
+  // Extract cities array and map once
   const { cities, cityMap } = useMemo(() => {
     const list = turkeyGeoJSON.features.map((f) => f.properties);
     const map = {};
@@ -79,7 +83,7 @@ const TurkeyMap = () => {
       setSelectedCity(null);
 
       if (regionName === 'Tümü') {
-        setTargetBounds(null);
+        setTargetBounds(TURKEY_BOUNDS);
         setTargetCenter(TURKEY_INITIAL_CENTER);
         setTargetZoom(TURKEY_INITIAL_ZOOM);
       } else {
@@ -92,11 +96,11 @@ const TurkeyMap = () => {
     []
   );
 
-  // Reset to full Turkey view
+  // Reset to full Turkey view (strictly locked to Turkey)
   const handleResetView = useCallback(() => {
     setSelectedCity(null);
     setSelectedRegion('Tümü');
-    setTargetBounds(null);
+    setTargetBounds(TURKEY_BOUNDS);
     setTargetCenter(TURKEY_INITIAL_CENTER);
     setTargetZoom(TURKEY_INITIAL_ZOOM);
   }, []);
@@ -113,7 +117,6 @@ const TurkeyMap = () => {
       const region = feature.properties.region;
 
       const isSelected = selectedCity === name;
-      const isHovered = hoveredCity === name;
       const isRegionActive =
         selectedRegion !== 'Tümü' && region === selectedRegion;
       const isDimmed =
@@ -121,22 +124,10 @@ const TurkeyMap = () => {
 
       if (isSelected) {
         return {
-          fillColor: '#F59E0B', // Vibrant amber
+          fillColor: '#F59E0B', // Vibrant amber highlight
           weight: 3,
           color: '#FFFFFF',
-          fillOpacity: 0.85,
-        };
-      }
-
-      if (isHovered) {
-        return {
-          fillColor:
-            colorMode === 'regions'
-              ? REGION_COLORS[region] || REGION_COLORS.Default
-              : '#3B82F6',
-          weight: 2.5,
-          color: '#0F172A',
-          fillOpacity: 0.85,
+          fillOpacity: 0.9,
         };
       }
 
@@ -156,11 +147,22 @@ const TurkeyMap = () => {
             : '#475569',
         weight: 1.2,
         color: '#FFFFFF',
-        fillOpacity: isRegionActive ? 0.75 : 0.55,
+        fillOpacity: isRegionActive ? 0.78 : 0.58,
       };
     },
-    [selectedCity, hoveredCity, selectedRegion, colorMode]
+    [selectedCity, selectedRegion, colorMode]
   );
+
+  // Update styles directly on the Leaflet layer instance without re-mounting DOM
+  useEffect(() => {
+    if (geoJsonRef.current && typeof geoJsonRef.current.eachLayer === 'function') {
+      geoJsonRef.current.eachLayer((layer) => {
+        if (layer.feature) {
+          layer.setStyle(getStyle(layer.feature));
+        }
+      });
+    }
+  }, [getStyle]);
 
   // Setup Leaflet event handlers for each polygon feature
   const onEachFeature = useCallback(
@@ -170,17 +172,21 @@ const TurkeyMap = () => {
       layer.on({
         click: (e) => {
           handleSelectCity(name);
-          // Prevent click from propagating to map
           if (e.originalEvent) {
             e.originalEvent.stopPropagation();
           }
         },
         mouseover: () => {
-          setHoveredCity(name);
+          // Instant direct Leaflet layer styling without React re-renders
+          layer.setStyle({
+            fillOpacity: 0.92,
+            weight: 2.5,
+            color: '#0F172A',
+          });
           layer.bringToFront();
         },
         mouseout: () => {
-          setHoveredCity((prev) => (prev === name ? null : prev));
+          layer.setStyle(getStyle(feature));
         },
       });
 
@@ -198,10 +204,8 @@ const TurkeyMap = () => {
         }
       );
     },
-    [handleSelectCity]
+    [handleSelectCity, getStyle]
   );
-
-  const currentBasemap = BASEMAPS[activeBasemap] || BASEMAPS.osm;
 
   return (
     <div className="app-layout">
@@ -212,32 +216,36 @@ const TurkeyMap = () => {
         onSelectCity={handleSelectCity}
         selectedRegion={selectedRegion}
         onSelectRegion={handleSelectRegion}
-        activeBasemap={activeBasemap}
-        onChangeBasemap={setActiveBasemap}
         colorMode={colorMode}
         onToggleColorMode={handleToggleColorMode}
         onResetView={handleResetView}
       />
 
-      {/* Main Map Area */}
+      {/* Main Map Area - Strictly bounded to Turkey */}
       <main className="map-wrapper">
         <MapContainer
-          center={TURKEY_INITIAL_CENTER}
-          zoom={TURKEY_INITIAL_ZOOM}
-          className="leaflet-map"
+          bounds={TURKEY_BOUNDS}
+          maxBounds={TURKEY_MAX_BOUNDS}
+          maxBoundsViscosity={1.0}
+          minZoom={TURKEY_MIN_ZOOM}
+          maxZoom={TURKEY_MAX_ZOOM}
+          zoomSnap={0.25}
           scrollWheelZoom={true}
-          zoomSnap={0.5}
+          className="leaflet-map"
         >
+          {/* Only Esri Canvas Light Gray Basemap - Fast, clean, watermark-free */}
           <TileLayer
-            key={currentBasemap.id}
-            url={currentBasemap.url}
-            attribution={currentBasemap.attribution}
-            maxZoom={currentBasemap.maxZoom}
-            subdomains={currentBasemap.subdomains || 'abc'}
+            url={ESRI_CANVAS_CONFIG.url}
+            attribution={ESRI_CANVAS_CONFIG.attribution}
+            maxZoom={ESRI_CANVAS_CONFIG.maxZoom}
+            minZoom={ESRI_CANVAS_CONFIG.minZoom}
+            keepBuffer={6}
+            updateWhenIdle={false}
+            updateWhenZooming={false}
           />
 
           <GeoJSON
-            key={`${selectedCity}-${selectedRegion}-${colorMode}`}
+            ref={geoJsonRef}
             data={turkeyGeoJSON}
             style={getStyle}
             onEachFeature={onEachFeature}

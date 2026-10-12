@@ -6,7 +6,7 @@ import App from './App';
 jest.mock('react-leaflet', () => ({
   MapContainer: ({ children }) => <div data-testid="map-container">{children}</div>,
   TileLayer: () => <div data-testid="tile-layer" />,
-  GeoJSON: () => <div data-testid="geojson-layer" />,
+  GeoJSON: require('react').forwardRef((props, ref) => <div ref={ref} data-testid="geojson-layer" />),
   useMap: () => ({
     flyTo: jest.fn(),
     fitBounds: jest.fn(),
