@@ -20,7 +20,7 @@ const TurkeyMap = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [hoveredCity, setHoveredCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('Tümü');
-  const [activeBasemap, setActiveBasemap] = useState('cartoLight');
+  const [activeBasemap, setActiveBasemap] = useState('osm');
   const [colorMode, setColorMode] = useState('regions'); // 'regions' or 'plain'
 
   const [targetBounds, setTargetBounds] = useState(null);
@@ -201,7 +201,7 @@ const TurkeyMap = () => {
     [handleSelectCity]
   );
 
-  const currentBasemap = BASEMAPS[activeBasemap] || BASEMAPS.cartoLight;
+  const currentBasemap = BASEMAPS[activeBasemap] || BASEMAPS.osm;
 
   return (
     <div className="app-layout">

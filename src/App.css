@@ -378,9 +378,10 @@ html, body {
   z-index: 500;
   background: var(--bg-card);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 8px 14px;
+  padding: 8px 12px;
   font-size: 0.8rem;
   color: var(--text-muted);
   box-shadow: var(--shadow-md);
@@ -388,12 +389,29 @@ html, body {
   align-items: center;
   gap: 8px;
   max-width: 380px;
-  pointer-events: none;
+  pointer-events: auto;
   animation: fadeIn 0.3s ease;
 }
 
 .hint-icon {
   font-size: 1rem;
+}
+
+.hint-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-left: 6px;
+  transition: all 0.15s ease;
+}
+
+.hint-close-btn:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
 }
 
 .info-panel-card {

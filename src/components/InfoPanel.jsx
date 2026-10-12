@@ -3,12 +3,22 @@ import { getCoordinatesInfo, REGION_COLORS } from '../utils/gisUtils';
 
 const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [showHint, setShowHint] = useState(true);
 
   if (!selectedCityData) {
+    if (!showHint) return null;
     return (
       <div className="info-panel-hint">
         <span className="hint-icon">💡</span>
         <span>Haritada bir ile tıklayarak veya arama yaparak detaylı CBS koordinatlarını görüntüleyin.</span>
+        <button
+          type="button"
+          className="hint-close-btn"
+          onClick={() => setShowHint(false)}
+          title="Kapat"
+        >
+          ✕
+        </button>
       </div>
     );
   }

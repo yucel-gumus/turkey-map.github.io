@@ -33,15 +33,6 @@ export const REGION_COLORS = {
 };
 
 export const BASEMAPS = {
-  cartoLight: {
-    id: 'cartoLight',
-    name: 'Açık (CartoDB Positron)',
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19,
-  },
   osm: {
     id: 'osm',
     name: 'Standart (OpenStreetMap)',
@@ -50,23 +41,30 @@ export const BASEMAPS = {
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19,
   },
-  cartoDark: {
-    id: 'cartoDark',
-    name: 'Koyu (CartoDB Dark)',
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19,
+  esriLight: {
+    id: 'esriLight',
+    name: 'Açık Minimal (Esri Canvas)',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16,
+  },
+  esriDark: {
+    id: 'esriDark',
+    name: 'Koyu Tema (Esri Dark)',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16,
   },
   satellite: {
     id: 'satellite',
     name: 'Uydu (Esri Imagery)',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    attribution:
+      'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
     maxZoom: 18,
   },
 };
+
 
 /**
  * Calculates GIS projections for given WGS84 coordinates using Proj4
