@@ -62,6 +62,7 @@ const Header = ({
               <span className="search-icon">🔍</span>
               <input
                 type="text"
+                aria-label="İl veya Plaka ara"
                 placeholder="İl veya Plaka ara (Örn: 34, Trabzon)..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -74,6 +75,7 @@ const Header = ({
               {searchTerm && (
                 <button
                   type="button"
+                  aria-label="Aramayı Temizle"
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
@@ -107,6 +109,7 @@ const Header = ({
             type="button"
             className={`btn-action ${colorMode === 'regions' ? 'active' : ''}`}
             onClick={onToggleColorMode}
+            aria-pressed={colorMode === 'regions'}
             title={
               colorMode === 'regions'
                 ? 'Sade renklendirmeye geç'
@@ -139,6 +142,7 @@ const Header = ({
                 type="button"
                 className={`region-chip ${isSelected ? 'active' : ''}`}
                 onClick={() => onSelectRegion(region)}
+                aria-pressed={isSelected}
               >
                 {region}
               </button>
