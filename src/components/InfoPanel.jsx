@@ -13,6 +13,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
         <span>Haritada bir ile tıklayarak veya arama yaparak detaylı CBS koordinatlarını görüntüleyin.</span>
         <button
           type="button"
+          aria-label="İpucunu kapat"
           className="hint-close-btn"
           onClick={() => setShowHint(false)}
           title="Kapat"
@@ -44,6 +45,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
         <div className="panel-actions">
           <button
             type="button"
+            aria-label={collapsed ? 'Paneli genişlet' : 'Paneli daralt'}
             className="panel-btn-icon"
             onClick={() => setCollapsed(!collapsed)}
             title={collapsed ? 'Genişlet' : 'Daralt'}
@@ -52,6 +54,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
           </button>
           <button
             type="button"
+            aria-label="Paneli kapat"
             className="panel-btn-icon"
             onClick={onClose}
             title="Kapat"
