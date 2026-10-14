@@ -62,6 +62,7 @@ const Header = ({
               <span className="search-icon">🔍</span>
               <input
                 type="text"
+                aria-label="İl veya plaka ara"
                 placeholder="İl veya Plaka ara (Örn: 34, Trabzon)..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -74,6 +75,7 @@ const Header = ({
               {searchTerm && (
                 <button
                   type="button"
+                  aria-label="Aramayı temizle"
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
