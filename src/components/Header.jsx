@@ -63,6 +63,7 @@ const Header = ({
               <input
                 type="text"
                 placeholder="İl veya Plaka ara (Örn: 34, Trabzon)..."
+                aria-label="İl veya plaka araması yapın"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
@@ -77,6 +78,7 @@ const Header = ({
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
+                  aria-label="Aramayı temizle"
                 >
                   ✕
                 </button>
