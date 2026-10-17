@@ -59,10 +59,11 @@ const Header = ({
           {/* Search Bar */}
           <div className="search-container" ref={searchRef}>
             <div className="search-input-wrapper">
-              <span className="search-icon">🔍</span>
+              <span className="search-icon" aria-hidden="true">🔍</span>
               <input
                 type="text"
                 placeholder="İl veya Plaka ara (Örn: 34, Trabzon)..."
+                aria-label="İl veya Plaka ara"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
@@ -77,6 +78,7 @@ const Header = ({
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
+                  aria-label="Aramayı temizle"
                 >
                   ✕
                 </button>
@@ -107,6 +109,7 @@ const Header = ({
             type="button"
             className={`btn-action ${colorMode === 'regions' ? 'active' : ''}`}
             onClick={onToggleColorMode}
+            aria-pressed={colorMode === 'regions'}
             title={
               colorMode === 'regions'
                 ? 'Sade renklendirmeye geç'
@@ -138,6 +141,7 @@ const Header = ({
                 key={region}
                 type="button"
                 className={`region-chip ${isSelected ? 'active' : ''}`}
+                aria-pressed={isSelected}
                 onClick={() => onSelectRegion(region)}
               >
                 {region}
