@@ -16,6 +16,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
           className="hint-close-btn"
           onClick={() => setShowHint(false)}
           title="Kapat"
+          aria-label="İpucunu kapat"
         >
           ✕
         </button>
@@ -47,6 +48,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
             className="panel-btn-icon"
             onClick={() => setCollapsed(!collapsed)}
             title={collapsed ? 'Genişlet' : 'Daralt'}
+            aria-label={collapsed ? 'Paneli genişlet' : 'Paneli daralt'}
           >
             {collapsed ? '▲' : '▼'}
           </button>
@@ -55,6 +57,7 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
             className="panel-btn-icon"
             onClick={onClose}
             title="Kapat"
+            aria-label="Paneli kapat"
           >
             ✕
           </button>
