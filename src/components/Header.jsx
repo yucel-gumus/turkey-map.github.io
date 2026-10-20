@@ -77,6 +77,7 @@ const Header = ({
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
+                  aria-label="Aramayı temizle"
                 >
                   ✕
                 </button>
@@ -112,6 +113,7 @@ const Header = ({
                 ? 'Sade renklendirmeye geç'
                 : 'Bölgesel renklendirmeye geç'
             }
+            aria-pressed={colorMode === 'regions'}
           >
             🎨 {colorMode === 'regions' ? 'Bölgesel Renk' : 'Sade Renk'}
           </button>
@@ -139,6 +141,7 @@ const Header = ({
                 type="button"
                 className={`region-chip ${isSelected ? 'active' : ''}`}
                 onClick={() => onSelectRegion(region)}
+                aria-pressed={isSelected}
               >
                 {region}
               </button>
