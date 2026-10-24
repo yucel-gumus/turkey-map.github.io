@@ -15,7 +15,8 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
           type="button"
           className="hint-close-btn"
           onClick={() => setShowHint(false)}
-          title="Kapat"
+          title="İpucunu kapat"
+          aria-label="İpucunu kapat"
         >
           ✕
         </button>
@@ -46,7 +47,9 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
             type="button"
             className="panel-btn-icon"
             onClick={() => setCollapsed(!collapsed)}
-            title={collapsed ? 'Genişlet' : 'Daralt'}
+            title={collapsed ? 'Paneli Genişlet' : 'Paneli Daralt'}
+            aria-label={collapsed ? 'Paneli Genişlet' : 'Paneli Daralt'}
+            aria-expanded={!collapsed}
           >
             {collapsed ? '▲' : '▼'}
           </button>
@@ -54,7 +57,8 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
             type="button"
             className="panel-btn-icon"
             onClick={onClose}
-            title="Kapat"
+            title="Paneli Kapat"
+            aria-label="Paneli Kapat"
           >
             ✕
           </button>
