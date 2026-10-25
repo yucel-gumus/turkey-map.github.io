@@ -59,10 +59,11 @@ const Header = ({
           {/* Search Bar */}
           <div className="search-container" ref={searchRef}>
             <div className="search-input-wrapper">
-              <span className="search-icon">🔍</span>
+              <span className="search-icon" aria-hidden="true">🔍</span>
               <input
                 type="text"
                 placeholder="İl veya Plaka ara (Örn: 34, Trabzon)..."
+                aria-label="İl veya Plaka ara"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
