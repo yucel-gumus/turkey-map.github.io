@@ -77,6 +77,7 @@ const Header = ({
                   className="search-clear-btn"
                   onClick={() => setSearchTerm('')}
                   title="Temizle"
+                  aria-label="Aramayı temizle"
                 >
                   ✕
                 </button>
