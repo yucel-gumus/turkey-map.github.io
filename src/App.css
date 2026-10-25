@@ -702,3 +702,18 @@ html, body {
     display: none;
   }
 }
+
+/* Keyboard Accessibility Focus Styles */
+.search-clear-btn:focus-visible,
+.hint-close-btn:focus-visible,
+.panel-btn-icon:focus-visible,
+.btn-action:focus-visible,
+.region-chip:focus-visible,
+.btn-zoom-focus:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.search-clear-btn:focus-visible {
+  border-radius: 4px;
+}
