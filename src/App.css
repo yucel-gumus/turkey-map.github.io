@@ -1,18 +1,22 @@
 /* ==========================================================================
-   Turkey Interactive Map - Modern GIS Styles
+   Turkey Interactive Map - İpek Küllü Arduvaz (60-30-10) GIS Styles
    ========================================================================== */
 
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #eff6ff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --border-light: rgba(226, 232, 240, 0.85);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --bg-elevated: #F5F9F5;
+  --bg-canvas: #EDF3EE;
+  --bg-hover: #DBE6DD;
+  --surface-card: #DCE3EA;
+  --bg-card: rgba(220, 227, 234, 0.94);
+  --border-light: #BCC7D2;
+  --text-muted: #3E5164;
+  --text-main: #253341;
+  --accent-soft: #F2A488;
+  --primary: #EC7D55;
+  --primary-hover: #AB421C;
+  --shadow-sm: 0 1px 3px rgba(37, 51, 65, 0.1);
+  --shadow-md: 0 4px 14px rgba(37, 51, 65, 0.14);
+  --shadow-lg: 0 10px 30px rgba(37, 51, 65, 0.18);
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -32,7 +36,7 @@ html, body {
   overflow: hidden;
   font-family: var(--font-family);
   color: var(--text-main);
-  background-color: #f8fafc;
+  background-color: var(--bg-canvas);
 }
 
 /* --------------------------------------------------------------------------
@@ -45,6 +49,7 @@ html, body {
   width: 100vw;
   overflow: hidden;
   position: relative;
+  background-color: var(--bg-canvas);
 }
 
 /* --------------------------------------------------------------------------
@@ -130,16 +135,20 @@ html, body {
   padding: 7px 30px 7px 32px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: var(--bg-elevated);
   font-size: 0.85rem;
   outline: none;
   transition: all 0.2s ease;
   color: var(--text-main);
 }
 
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
 .search-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(236, 125, 85, 0.25);
 }
 
 .search-clear-btn {
@@ -153,17 +162,22 @@ html, body {
   padding: 4px;
 }
 
+.search-clear-btn:hover {
+  color: var(--primary-hover);
+}
+
 .search-dropdown {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: var(--surface-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   max-height: 280px;
   overflow-y: auto;
+  scrollbar-color: var(--text-muted) var(--surface-card);
   margin: 0;
   padding: 4px 0;
   list-style: none;
@@ -178,16 +192,20 @@ html, body {
   cursor: pointer;
   transition: background 0.15s ease;
   font-size: 0.85rem;
+  color: var(--text-main);
 }
 
-.search-dropdown-item:hover,
+.search-dropdown-item:hover {
+  background: var(--bg-hover);
+}
+
 .search-dropdown-item.active {
-  background: var(--primary-light);
+  background: var(--accent-soft);
 }
 
 .plate-badge {
-  background: #0f172a;
-  color: #ffffff;
+  background: var(--text-main);
+  color: var(--bg-elevated);
   font-weight: 700;
   font-size: 0.7rem;
   padding: 2px 6px;
@@ -225,7 +243,7 @@ html, body {
   padding: 7px 12px 7px 28px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: var(--bg-elevated);
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-main);
@@ -242,7 +260,7 @@ html, body {
   padding: 7px 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: var(--bg-elevated);
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-main);
@@ -254,19 +272,19 @@ html, body {
 }
 
 .btn-action:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
+  background: var(--bg-hover);
+  border-color: var(--text-muted);
 }
 
 .btn-action.active {
-  background: var(--primary-light);
+  background: var(--bg-hover);
   border-color: var(--primary);
-  color: var(--primary);
+  color: var(--primary-hover);
   font-weight: 600;
 }
 
 .reset-btn:hover {
-  color: var(--primary);
+  color: var(--primary-hover);
 }
 
 /* Region Chips Nav */
@@ -274,6 +292,7 @@ html, body {
   width: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
+  scrollbar-color: var(--border-light) var(--surface-card);
   padding-bottom: 2px;
 }
 
@@ -288,7 +307,7 @@ html, body {
   padding: 4px 12px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: var(--bg-elevated);
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -298,16 +317,17 @@ html, body {
 }
 
 .region-chip:hover {
-  border-color: #94a3b8;
+  background: var(--bg-hover);
+  border-color: var(--text-muted);
   color: var(--text-main);
 }
 
 .region-chip.active {
   background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
+  border-color: var(--primary-hover);
+  color: var(--text-main);
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 6px rgba(236, 125, 85, 0.28);
 }
 
 /* --------------------------------------------------------------------------
@@ -318,35 +338,35 @@ html, body {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #f8fafc;
+  background-color: #EDF3EE;
 }
 
 .leaflet-map {
   width: 100%;
   height: 100%;
-  background-color: #f8fafc !important;
+  background-color: #EDF3EE !important;
   z-index: 1;
 }
 
 .leaflet-container {
-  background: #f8fafc !important;
+  background: #EDF3EE !important;
 }
 
 /* Custom Tooltip */
 .leaflet-custom-tooltip {
-  background: rgba(15, 23, 42, 0.92) !important;
+  background: rgba(37, 51, 65, 0.94) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(188, 199, 210, 0.35) !important;
   border-radius: var(--radius-sm) !important;
-  color: #ffffff !important;
+  color: #F5F9F5 !important;
   box-shadow: var(--shadow-md) !important;
   padding: 4px 8px !important;
   font-size: 0.8rem !important;
 }
 
 .leaflet-custom-tooltip::before {
-  border-top-color: rgba(15, 23, 42, 0.92) !important;
+  border-top-color: rgba(37, 51, 65, 0.94) !important;
 }
 
 .tooltip-inner {
@@ -356,8 +376,8 @@ html, body {
 }
 
 .tooltip-plate {
-  background: #f59e0b;
-  color: #0f172a;
+  background: #EC7D55;
+  color: #253341;
   font-weight: 800;
   font-size: 0.7rem;
   padding: 1px 5px;
@@ -369,7 +389,7 @@ html, body {
 }
 
 .tooltip-region {
-  color: #94a3b8;
+  color: #DCE3EA;
   font-size: 0.72rem;
 }
 
@@ -415,7 +435,7 @@ html, body {
 }
 
 .hint-close-btn:hover {
-  background: #e2e8f0;
+  background: var(--bg-hover);
   color: var(--text-main);
 }
 
@@ -442,7 +462,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-light);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(245, 249, 245, 0.7);
 }
 
 .panel-title-group {
@@ -452,12 +472,14 @@ html, body {
 }
 
 .panel-plate-badge {
-  color: #ffffff;
+  background: var(--primary);
+  color: var(--text-main);
+  border: 1px solid var(--primary-hover);
   font-weight: 800;
   font-size: 0.95rem;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(37, 51, 65, 0.2);
 }
 
 .panel-city-name {
@@ -471,6 +493,7 @@ html, body {
 .panel-city-region {
   font-size: 0.78rem;
   font-weight: 600;
+  color: var(--text-muted);
 }
 
 .panel-actions {
@@ -491,7 +514,7 @@ html, body {
 }
 
 .panel-btn-icon:hover {
-  background: #f1f5f9;
+  background: var(--bg-hover);
   color: var(--text-main);
 }
 
@@ -518,8 +541,8 @@ html, body {
 }
 
 .gis-cell {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   padding: 6px 10px;
   display: flex;
@@ -541,7 +564,7 @@ html, body {
 
 .gis-subvalue {
   font-size: 0.72rem;
-  color: #475569;
+  color: var(--text-muted);
   font-family: monospace;
   margin-top: 2px;
 }
@@ -556,13 +579,13 @@ html, body {
   width: 100%;
   padding: 8px 12px;
   background: var(--primary);
-  color: #ffffff;
-  border: none;
+  color: var(--text-main);
+  border: 1px solid var(--primary-hover);
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -571,6 +594,7 @@ html, body {
 
 .btn-zoom-focus:hover {
   background: var(--primary-hover);
+  color: var(--bg-elevated);
 }
 
 /* --------------------------------------------------------------------------
@@ -605,7 +629,7 @@ html, body {
 }
 
 .badge-divider {
-  color: #cbd5e1;
+  color: var(--border-light);
 }
 
 .badge-author {
@@ -614,7 +638,7 @@ html, body {
 }
 
 .author-link {
-  color: var(--primary);
+  color: var(--primary-hover);
   text-decoration: none;
   font-weight: 700;
   transition: color 0.15s ease;
@@ -622,7 +646,7 @@ html, body {
 
 .author-link:hover {
   text-decoration: underline;
-  color: var(--primary-hover);
+  color: var(--text-main);
 }
 
 /* --------------------------------------------------------------------------

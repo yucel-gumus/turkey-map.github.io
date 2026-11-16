@@ -29,6 +29,8 @@ const TurkeyMap = () => {
   const [targetZoom, setTargetZoom] = useState(TURKEY_INITIAL_ZOOM);
 
   const geoJsonRef = useRef(null);
+  const selectedCityRef = useRef(selectedCity);
+  selectedCityRef.current = selectedCity;
 
   // Extract cities array and map once
   const { cities, cityMap } = useMemo(() => {
@@ -123,19 +125,19 @@ const TurkeyMap = () => {
 
       if (isSelected) {
         return {
-          fillColor: '#F59E0B', // Vibrant amber highlight
+          fillColor: '#EC7D55',
           weight: 3,
-          color: '#FFFFFF',
-          fillOpacity: 0.9,
+          color: '#AB421C',
+          fillOpacity: 0.92,
         };
       }
 
       if (isDimmed) {
         return {
-          fillColor: '#94A3B8',
+          fillColor: '#DCE3EA',
           weight: 0.8,
-          color: '#E2E8F0',
-          fillOpacity: 0.12,
+          color: '#BCC7D2',
+          fillOpacity: 0.25,
         };
       }
 
@@ -143,14 +145,17 @@ const TurkeyMap = () => {
         fillColor:
           colorMode === 'regions'
             ? REGION_COLORS[region] || REGION_COLORS.Default
-            : '#475569',
+            : '#DCE3EA',
         weight: 1.2,
-        color: '#FFFFFF',
-        fillOpacity: isRegionActive ? 0.78 : 0.58,
+        color: '#3E5164',
+        fillOpacity: isRegionActive ? 0.92 : 0.82,
       };
     },
     [selectedCity, selectedRegion, colorMode]
   );
+
+  const getStyleRef = useRef(getStyle);
+  getStyleRef.current = getStyle;
 
   // Update styles directly on the Leaflet layer instance without re-mounting DOM
   useEffect(() => {
@@ -177,15 +182,26 @@ const TurkeyMap = () => {
         },
         mouseover: () => {
           // Instant direct Leaflet layer styling without React re-renders
-          layer.setStyle({
-            fillOpacity: 0.92,
-            weight: 2.5,
-            color: '#0F172A',
-          });
+          const isCurrentSelected = selectedCityRef.current === name;
+          layer.setStyle(
+            isCurrentSelected
+              ? {
+                  fillColor: '#EC7D55',
+                  fillOpacity: 0.95,
+                  weight: 3,
+                  color: '#AB421C',
+                }
+              : {
+                  fillColor: '#F2A488',
+                  fillOpacity: 0.9,
+                  weight: 2.5,
+                  color: '#AB421C',
+                }
+          );
           layer.bringToFront();
         },
         mouseout: () => {
-          layer.setStyle(getStyle(feature));
+          layer.setStyle(getStyleRef.current(feature));
         },
       });
 
@@ -203,7 +219,7 @@ const TurkeyMap = () => {
         }
       );
     },
-    [handleSelectCity, getStyle]
+    [handleSelectCity]
   );
 
   return (

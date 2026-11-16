@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getCoordinatesInfo, REGION_COLORS } from '../utils/gisUtils';
+import { getCoordinatesInfo } from '../utils/gisUtils';
 
 const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -26,18 +26,17 @@ const InfoPanel = ({ selectedCityData, onClose, onZoomToCity }) => {
 
   const { name, plate, region, center } = selectedCityData;
   const coordsInfo = center ? getCoordinatesInfo(center[0], center[1]) : null;
-  const regionColor = REGION_COLORS[region] || REGION_COLORS.Default;
 
   return (
     <div className={`info-panel-card ${collapsed ? 'collapsed' : ''}`}>
       <div className="panel-header">
         <div className="panel-title-group">
-          <span className="panel-plate-badge" style={{ backgroundColor: regionColor }}>
+          <span className="panel-plate-badge">
             {plate}
           </span>
           <div>
             <h2 className="panel-city-name">{name}</h2>
-            <span className="panel-city-region" style={{ color: regionColor }}>
+            <span className="panel-city-region">
               {region} Bölgesi
             </span>
           </div>

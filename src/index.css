@@ -12,8 +12,8 @@ code {
     monospace;
 }
 .popup-label {
-  background-color: white;
-  color: black;
+  background-color: #F5F9F5;
+  color: #253341;
   font-size: 14px;
   border-radius: 4px;
   padding: 5px;

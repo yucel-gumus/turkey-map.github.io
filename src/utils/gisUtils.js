@@ -39,14 +39,14 @@ export const REGIONS = [
 ];
 
 export const REGION_COLORS = {
-  Marmara: '#3B82F6',        // Vibrant Blue
-  Ege: '#10B981',            // Emerald
-  Akdeniz: '#06B6D4',        // Cyan
-  'İç Anadolu': '#F59E0B',   // Amber
-  Karadeniz: '#059669',      // Green
-  'Doğu Anadolu': '#8B5CF6', // Purple
-  'Güneydoğu Anadolu': '#EC4899', // Pink
-  Default: '#64748B',
+  Marmara: '#BCC7D2',
+  Ege: '#DBE6DD',
+  Akdeniz: '#F2A488',
+  'İç Anadolu': '#DCE3EA',
+  Karadeniz: '#3E5164',
+  'Doğu Anadolu': '#F5F9F5',
+  'Güneydoğu Anadolu': '#BCC7D2',
+  Default: '#DCE3EA',
 };
 
 // Coordinate cache for O(1) performance
